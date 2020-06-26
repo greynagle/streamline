@@ -1,0 +1,19 @@
+* {
+	text-align: center;
+}
+
+ul{
+	list-style: none;
+	display: flex;
+	justify-content: space-evenly;
+	background-color: gainsboro;
+	margin-top: 0px;
+	padding-bottom: .5vh;
+}
+
+.App_main {
+	background-color: #222233;
+	color: #aaccff;
+	height:100vh
+}
+

@@ -1,0 +1,33 @@
+* {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.App_header {
+    /* position: absolute; */
+    background-color: gainsboro;
+    width: 100%;
+    padding-top: 1px;
+    padding-bottom: 1vh;
+}
+
+header > h1 > a {
+    text-decoration-line: none;
+}
+
+ul {
+    padding-left: 0px;
+	
+}
+
+.header {
+	background-color: #222233;
+	color: #aaccff;
+	height:100vh
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
