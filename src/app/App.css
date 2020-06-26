@@ -31,3 +31,22 @@ th,
 td {
     border: 1px solid black;
 }
+
+label{
+	float: left;
+	margin-left: 10px
+}
+
+input{
+	float: right;
+	margin-right: 10px;
+}
+
+.Button__Array {
+	float: right;
+	margin-right: 10px;
+}
+
+.instructions{
+	clear: right;
+}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./pdm.css"
-
+import "./pdm.css";
 
 const Required = () => <span className="prt_required">*</span>;
 
@@ -18,7 +17,6 @@ export default class PrtForm extends React.Component {
 
     handleClickCancel = () => {
         alert("Cancelled");
-        
     };
 
     render() {
@@ -97,13 +95,23 @@ export default class PrtForm extends React.Component {
                         <button type="submit">Submit</button>
                     </div>
                 </form>
-				<p>
-					Please input all available information.<br/>
-					The part number is a six-digit ID number.<br/>The description is a 
-					component definition.<br/>The stock origin is the type of raw material
-					used.<br/>The machine code dictates what machines process the component.<br/>
-					The complexity is a measure of minutes to machine from stock.
-				</p>
+                <div className="instructions">
+                    <p>
+                        Please input all available information.
+                        <br />
+                        The part number is a six-digit ID number.
+                        <br />
+                        The description is a component definition.
+                        <br />
+                        The stock origin is the type of raw material used.
+                        <br />
+                        The machine code dictates what machines process the
+                        component.
+                        <br />
+                        The complexity is a measure of minutes to machine from
+                        stock.
+                    </p>
+                </div>
             </section>
         );
     }

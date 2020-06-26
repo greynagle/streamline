@@ -10,7 +10,7 @@ import {
 // import config from "../config";
 import MfgMachineForm from "./mfg-machine-form";
 // import MfgCellForm from "./mfg-cell-form";
-import "./mfg.css"
+import "./mfg.css";
 
 export default class MFG extends React.Component {
     render() {
@@ -21,7 +21,7 @@ export default class MFG extends React.Component {
                 <>
                     <ul>
                         <li>
-                            <Link to={`${url}`}>Current Data</Link>
+                            <Link to={`${url}`}>MFG Data</Link>
                         </li>
                         <li>
                             <Link to={`${url}/mfg-machine-form`}>
@@ -35,6 +35,7 @@ export default class MFG extends React.Component {
 
                     <Switch>
                         <Route exact path={path}>
+                            <h2>MFG Data</h2>
                             <span>
                                 The Manufacturing branch is designed for adding
                                 machines and associated
@@ -46,7 +47,37 @@ export default class MFG extends React.Component {
                             </span>
                             <br />
                             <br />
-                            <span>To be filled in with table data from backend</span>
+							<span>Current Data:</span>
+                            <table className="MFG_Table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>TP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>17</td>
+                                        <td>Haustaler</td>
+                                        <th>M</th>
+                                        <td>15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td>Boff</td>
+                                        <th>M</th>
+                                        <td>19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                        <td>Mart</td>
+                                        <th>L</th>
+                                        <td>17</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </Route>
                         <Route path={`${path}/:formType`}>
                             <Forms />

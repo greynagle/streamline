@@ -29,9 +29,7 @@ export default class MachineForm extends React.Component {
                         {error && <p>{error.message}</p>}
                     </div>
                     <div>
-                        <label htmlFor="name">
-                            Machine Name
-                        </label>
+                        <label htmlFor="name">Machine Name</label>
                         <input
                             type="text"
                             name="name"
@@ -71,12 +69,20 @@ export default class MachineForm extends React.Component {
                         <button type="submit">Submit</button>
                     </div>
                 </form>
-				<p>
-					Please input all available information.<br/>
-					The machine name is used to identify the various machines.<br/>The machine
-					type determines what type of operations the machine performs.<br/>The throughput
-					determines how many components of complexity 1.0 can be processed per minute.
-				</p>
+                <div className="instructions">
+                    <p>
+                        Please input all available information.
+                        <br />
+                        The machine name is used to identify the various
+                        machines.
+                        <br />
+                        The machine type determines what type of operations the
+                        machine performs.
+                        <br />
+                        The throughput determines how many components of
+                        complexity 1.0 can be processed per minute.
+                    </p>
+                </div>
             </section>
         );
     }

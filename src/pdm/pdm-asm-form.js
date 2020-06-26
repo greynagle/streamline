@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./pdm.css"
+import "./pdm.css";
 
 const Required = () => <span className="asm_required">*</span>;
 
-export default class AsmForm extends React.Component {
+export default class AsmForm extends Component {
     state = {
         error: null,
     };
@@ -25,10 +25,7 @@ export default class AsmForm extends React.Component {
         return (
             <section className="asm_form">
                 <h2>New Assembly</h2>
-                <form
-                    className="asm_form"
-                    onSubmit={this.handleSubmit}
-                >
+                <form className="asm_form" onSubmit={this.handleSubmit}>
                     <div className="asm_error" role="alert">
                         {error && <p>{error.message}</p>}
                     </div>
@@ -57,14 +54,15 @@ export default class AsmForm extends React.Component {
                         />
                     </div>
                     <div>
-                        <label className="contents" htmlFor="content">
-							Contents (cs) <Required />
-						</label>
+                        <label htmlFor="content">
+                            Contents (cs) <Required />
+                        </label>
                         <textarea
-                            name="content"
+                            className="asm_textarea"
+							name="content"
                             id="content"
-							cols="7"
-							rows="10"
+                            cols="7"
+                            rows="1"
                             required
                         />
                     </div>
@@ -75,12 +73,18 @@ export default class AsmForm extends React.Component {
                         <button type="submit">Submit</button>
                     </div>
                 </form>
-				<p>
-					Please input all available information.<br/>
-					The asm. number is a six-digit ID number.<br/>The description is a 
-					component definition.<br/>The contents are a comma-separated list of 
-					six-digit part numbers.
-				</p>
+                <div className="instructions">
+                    <p>
+                        Please input all available information.
+                        <br />
+                        The asm. number is a six-digit ID number.
+                        <br />
+                        The description is a component definition.
+                        <br />
+                        The contents are a comma-separated list of six-digit
+                        part numbers.
+                    </p>
+                </div>
             </section>
         );
     }

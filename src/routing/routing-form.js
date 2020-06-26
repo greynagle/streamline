@@ -24,16 +24,23 @@ export default class RoutingForm extends React.Component {
         return (
             <>
                 <section className="routing_form">
-                    <h2>Add a new route plan</h2>
+                    <h2>New Route Plan</h2>
                     <form className="routing_form" onSubmit={this.handleSubmit}>
                         <div className="routing_error" role="alert">
                             {error && <p>{error.message}</p>}
                         </div>
                         <div>
-                            <label className="routing_label" htmlFor="asm">
-                                Assembly Number <Required />
+                            <label htmlFor="content">
+                                Asm. Numbers <Required />
                             </label>
-                            <textarea name="asm" id="asm" required />
+                            <textarea
+                                className="routing_textarea"
+                                name="asm"
+                                id="asm"
+                                cols="7"
+                                rows="1"
+                                required
+                            />
                         </div>
                         <div className="Button__Array">
                             <button
@@ -46,18 +53,21 @@ export default class RoutingForm extends React.Component {
                         </div>
                     </form>
                 </section>
-                <p>
-                    Assembly number is a comma-separated list of assemblies. The
-                    test will use all available machines without preference.
-                </p>
+                <div className="instructions">
+                    <p>
+                        Assembly number is a comma-separated list of assemblies.
+                        The test will use all available machines without
+                        preference.
+                    </p>
+                </div>
                 <br />
                 <section className="routing_report">
                     Machine usage:
                     <table className="routing_machine_table">
                         <thead>
                             <tr>
-                                <th>Machine name</th>
-                                <th>Machine type</th>
+                                <th>Name</th>
+                                <th>Type</th>
                                 <th>Time (min)</th>
                             </tr>
                         </thead>
@@ -71,25 +81,6 @@ export default class RoutingForm extends React.Component {
                                 <td>Okuma</td>
                                 <td>M</td>
                                 <td>3.6</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    Plan result:
-                    <table className="routing_plan_table">
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Time (min)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>123456</td>
-                                <td>2.6</td>
-                            </tr>
-                            <tr>
-                                <td>234567</td>
-                                <td>3.8</td>
                             </tr>
                         </tbody>
                     </table>

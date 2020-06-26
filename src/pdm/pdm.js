@@ -21,7 +21,7 @@ export default class PDM extends React.Component {
                 <>
                     <ul>
                         <li>
-                            <Link to={`${url}`}>Current Data</Link>
+                            <Link to={`${url}`}>PDM Data</Link>
                         </li>
                         <li>
                             <Link to={`${url}/prt-form`}>New Part</Link>
@@ -33,15 +33,54 @@ export default class PDM extends React.Component {
 
                     <Switch>
                         <Route exact path={path}>
+                            <h2>PDM Data</h2>
                             <span>
-                                The PDM branch is designed for adding<br/>parts
-                                (individual components) and assemblies (bundles
-                                of components).<br/>Follow the links above to find
-                                the proper input form.
+                                The PDM branch is designed for adding
+                                <br />
+                                parts (individual components) and assemblies
+                                (bundles of components).
+                                <br />
+                                Follow the links above to find the proper input
+                                form.
                             </span>
-							<br/>
-							<br/>
-                            <span>To be filled in with table data from backend</span>
+                            <br />
+                            <br />
+							<span>Current Data:</span>
+                        
+							<table className="PDM_Table">
+                                <thead>
+                                    <tr>
+                                        <th>PN</th>
+                                        <th>Desc</th>
+                                        <th>SO</th>
+                                        <th>MC</th>
+                                        <th>Comp.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>123000</td>
+                                        <td>Gland</td>
+                                        <td>A276</td>
+                                        <td>TM</td>
+                                        <td>3,1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>123001</td>
+                                        <td>Sleeve</td>
+                                        <td>A276</td>
+                                        <td>TM</td>
+                                        <td>5,1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>123002</td>
+                                        <td>Lock Ring</td>
+                                        <td>A276</td>
+                                        <td>T</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </Route>
                         <Route path={`${path}/:formType`}>
                             <Forms />
