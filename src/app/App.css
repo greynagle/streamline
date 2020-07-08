@@ -11,6 +11,7 @@
     padding-bottom: 1vh;
 }
 
+
 header > h1 > a {
     text-decoration-line: none;
 }
@@ -37,9 +38,16 @@ label{
 	margin-left: 10px
 }
 
-input{
+.new-inputs{
 	float: right;
 	margin-right: 10px;
+	width:50%
+}
+
+.info {
+	display: block;
+    margin-left: 3vw;
+	margin-right: 3vw;
 }
 
 .Button__Array {

@@ -7,10 +7,11 @@ import {
     useParams,
     useRouteMatch,
 } from "react-router-dom";
-// import config from "../config";
+import config from "../config";
 import MfgMachineForm from "./mfg-machine-form";
 // import MfgCellForm from "./mfg-cell-form";
 import "./mfg.css";
+import MfgTable from "./MfgTable";
 
 export default class MFG extends React.Component {
     render() {
@@ -36,48 +37,16 @@ export default class MFG extends React.Component {
                     <Switch>
                         <Route exact path={path}>
                             <h2>MFG Data</h2>
-                            <span>
+                            <span className="info">
                                 The Manufacturing branch is designed for adding
-                                machines and associated
-                                <br />
-                                data used to process parts
-                                <br />
-                                Follow the links above to find the proper input
-                                form.
+                                machines and associated data used to process
+                                parts Follow the links above to find the proper
+                                input form.
                             </span>
                             <br />
                             <br />
-							<span>Current Data:</span>
-                            <table className="MFG_Table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>TP</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>17</td>
-                                        <td>Haustaler</td>
-                                        <th>M</th>
-                                        <td>15</td>
-                                    </tr>
-                                    <tr>
-                                        <td>18</td>
-                                        <td>Boff</td>
-                                        <th>M</th>
-                                        <td>19</td>
-                                    </tr>
-                                    <tr>
-                                        <td>19</td>
-                                        <td>Mart</td>
-                                        <th>L</th>
-                                        <td>17</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <span>Current Machines:</span>
+                            <MfgTable />
                         </Route>
                         <Route path={`${path}/:formType`}>
                             <Forms />
@@ -101,7 +70,7 @@ export default class MFG extends React.Component {
         }
 
         return (
-            <div className="header">
+            <div className="sub-header">
                 <Links />
             </div>
         );

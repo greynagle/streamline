@@ -1,22 +1,73 @@
 import React, { Component } from "react";
 import "./pdm.css";
+import ApiContext from "../ApiContext";
+import config from "../config";
+
 
 const Required = () => <span className="prt_required">*</span>;
 
-export default class PrtForm extends React.Component {
+export default class PrtForm extends Component {
+    static defaultProps = {
+        history: {
+            goBack: () => {},
+        },
+		match: {
+            params: {},
+        },
+    };
+    static contextType = ApiContext;
     state = {
         error: null,
+        description: "",
+        stock: "",
+        machine: "M",
+        complexity: "",
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // get the form fields from the event
-        // fetch post data
-        alert("Submitted");
+        if (
+            /[^a-zA-Z\d\s,]/.test(this.state.description) ||
+            /[^a-zA-Z\d\s,]/.test(this.state.stock) ||
+            /[^\d,.]/.test(this.state.complexity) || 
+			this.state.machine.split('').length !== this.state.complexity.split(",").length
+        ) {
+            alert("Input Error: Verify input validity");
+        } else {
+            fetch(`${config.API_ENDPOINT}/parts/`, {
+                mode: "cors",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Authorization: `Bearer ${config.API_TOKEN}`,
+                },
+                body: JSON.stringify({
+                    description: this.state.description,
+                    stock: this.state.stock,
+                    machine: this.state.machine,
+                    complexity: this.state.complexity,
+                }),
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        return res.json().then((e) => Promise.reject(e));
+                    }
+                    return res.json();
+                })
+                .then((resJSON) => {
+                    const {description, id, stock} = resJSON
+					this.context.addPart({description, id, stock});
+                })
+                .catch((error) => {
+                    console.error({ error });
+                });
+        }
     };
 
-    handleClickCancel = () => {
-        alert("Cancelled");
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value,
+        });
     };
 
     render() {
@@ -29,88 +80,81 @@ export default class PrtForm extends React.Component {
                         {error && <p>{error.message}</p>}
                     </div>
                     <div>
-                        <label htmlFor="pn">
-                            Part Number <Required />
-                        </label>
-                        <input
-                            type="number"
-                            name="pn"
-                            id="pn"
-                            placeholder="123456"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="desc">
+                        <label htmlFor="description">
                             Description <Required />
                         </label>
                         <input
+                            className="new-inputs"
                             type="text"
-                            name="desc"
-                            id="desc"
+                            name="description"
+                            id="description"
                             placeholder="999 30mm Gland 316"
+                            onChange={this.handleChange}
+                            autoComplete="off"
                             required
                         />
                     </div>
                     <div>
-                        <label htmlFor="so">
+                        <label htmlFor="stock">
                             Stock Origin <Required />
                         </label>
                         <input
+                            className="new-inputs"
                             type="text"
-                            name="so"
-                            id="so"
+                            name="stock"
+                            id="stock"
                             placeholder="316 UNS S31600, ASTM A276"
+                            onChange={this.handleChange}
+                            autoComplete="off"
                             required
                         />
                     </div>
                     <div>
-                        <label htmlFor="mc">
+                        <label htmlFor="machine">
                             Machine Code <Required />
                         </label>
-                        <input
-                            type="text"
-                            name="mc"
-                            id="mc"
-                            placeholder="e.g. M/T"
-                            required
-                        />
+                        <select
+                            className="new-inputs"
+                            id="machine"
+                            onChange={this.handleChange}
+                            autoComplete="off"
+                        >
+                            <option value="M">Mill</option>
+                            <option value="T">Lathe</option>
+                            <option value="MT">Mill/Lathe</option>
+                            <option value="TM">Lathe/Mill</option>
+                        </select>
                     </div>
                     <div>
-                        <label htmlFor="comp">
+                        <label htmlFor="complexity">
                             Complexity <Required />
                         </label>
                         <input
-                            type="number"
-                            name="comp"
-                            id="comp"
-                            placeholder="1.00"
+                            className="new-inputs"
+                            type="string"
+                            name="complexity"
+                            id="complexity"
+                            placeholder="1.00,2.50"
+                            onChange={this.handleChange}
+                            autoComplete="off"
                             required
                         />
                     </div>
                     <div className="Button__Array">
-                        <button type="button" onClick={this.handleClickCancel}>
+                        <button type="button" onClick={() => this.props.history.goBack()}>
                             Cancel
                         </button>{" "}
                         <button type="submit">Submit</button>
                     </div>
                 </form>
                 <div className="instructions">
-                    <p>
-                        Please input all available information.
-                        <br />
-                        The part number is a six-digit ID number.
-                        <br />
-                        The description is a component definition.
-                        <br />
-                        The stock origin is the type of raw material used.
-                        <br />
-                        The machine code dictates what machines process the
-                        component.
-                        <br />
-                        The complexity is a measure of minutes to machine from
-                        stock.
-                    </p>
+                    <span className="info">
+                        Please input all available information. Description is a
+                        component definition. Stock Origin is the type of raw
+                        material used. Machine Code dictates what machines
+                        process the component. Complexity is a comma separated
+                        list of how many minutes each operation takes.
+                    </span>
                 </div>
             </section>
         );

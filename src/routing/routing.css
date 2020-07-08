@@ -14,7 +14,12 @@ p {
     width: 93vw;
 }
 
-.routing_plan_table {
+.test_table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.test_asm_table {
     margin-left: auto;
     margin-right: auto;
 }
@@ -23,7 +28,7 @@ p {
     margin-left: 20px;
 }
 
-.routing_machine_table {
+.test_machine_table {
     margin-left: auto;
     margin-right: auto;
 }

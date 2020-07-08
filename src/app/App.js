@@ -1,44 +1,59 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
-// import config from "../config";
+import config from "../config";
 import "./App.css";
 import Landing from "../landing/landing";
 import PDM from "../pdm/pdm";
 import MFG from "../mfg/mfg";
 import Routing from "../routing/routing";
+import ApiContext from "../ApiContext";
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notes: [],
-            folders: [],
+            parts: [],
+            assemblies: [],
+            machines: [],
+            tests: [],
         };
     }
 
-    // componentDidMount() {
-    //     // // grabs all notes and folders from the local JSON server
-    //     // Promise.all([
-    //     //     fetch(`${config.API_ENDPOINT}/notes`),
-    //     //     fetch(`${config.API_ENDPOINT}/folders`),
-    //     // ])
-    //     //     .then(([notesRes, foldersRes]) => {
-    //     //         // if notes break, reject
-    //     //         if (!notesRes.ok)
-    //     //             return notesRes.json().then((e) => Promise.reject(e));
-    //     //         // if folders break reject
-    //     //         if (!foldersRes.ok)
-    //     //             return foldersRes.json().then((e) => Promise.reject(e));
+    componentDidMount() {
+        // grabs all notes and folders from the local JSON server
+        Promise.all([
+            fetch(`${config.API_ENDPOINT}/parts/all`),
+            fetch(`${config.API_ENDPOINT}/assemblies/all`),
+            fetch(`${config.API_ENDPOINT}/machines/all`),
+            fetch(`${config.API_ENDPOINT}/tests/all`),
+        ])
+            .then(([prtRes, asmRes, macRes, tstRes]) => {
+                // if parts break, reject
+                if (!prtRes.ok)
+                    return prtRes.json().then((e) => Promise.reject(e));
+                // if assemblies break reject
+                if (!asmRes.ok)
+                    return asmRes.json().then((e) => Promise.reject(e));
+                if (!macRes.ok)
+                    return macRes.json().then((e) => Promise.reject(e));
+                if (!tstRes.ok)
+                    return tstRes.json().then((e) => Promise.reject(e));
 
-    //     //         return Promise.all([notesRes.json(), foldersRes.json()]);
-    //     //     })
-    //     //     .then(([notes, folders]) => {
-    //     //         this.setState({ notes, folders });
-    //     //     })
-    //     //     .catch((error) => {
-    //     //         console.error({ error });
-    //     //     });
-    // }
+                return Promise.all([
+                    prtRes.json(),
+                    asmRes.json(),
+                    macRes.json(),
+                    tstRes.json(),
+                ]);
+            })
+            .then(([parts, assemblies, machines, tests]) => {
+                // console.log(parts);
+                this.setState({ parts, assemblies, machines, tests });
+            })
+            .catch((error) => {
+                console.error({ error });
+            });
+    }
 
     // renderNavRoutes() {
     //     return (
@@ -67,26 +82,77 @@ class App extends Component {
         );
     }
 
+    handleAddPart = (part) => {
+        this.setState({
+            parts: [...this.state.parts, part],
+        });
+    };
+
+    handleAddAssembly = (assembly) => {
+        this.setState({
+            assemblies: [...this.state.assemblies, assembly],
+        });
+    };
+
+    handleAddMachine = (machine) => {
+        this.setState({
+            machines: [...this.state.machines, machine],
+        });
+    };
+
+    handleAddTest = (test) => {
+        this.setState({
+            tests: [...this.state.tests, test],
+        });
+    };
+
+    handleDeletePart = (partId) => {
+        this.setState({
+            parts: this.state.parts.filter((part) => part.id !== partId),
+        });
+    };
+
+	handleDeleteAssembly = (asmId) => {
+        this.setState({
+            assemblies: this.state.assemblies.filter((asm) => asm.id !== asmId),
+        });
+    };
+
+	handleDeleteMachine = (macId) => {
+        this.setState({
+            machines: this.state.machines.filter((mac) => mac.id !== macId),
+        });
+    };
+
     render() {
-        // const value = {
-        //     notes: this.state.notes,
-        //     folders: this.state.folders,
-        //     deleteNote: this.handleDeleteNote,
-        //     addFolder: this.addFolder,
-        //     addNote: this.addNote,
-        // };
+        const value = {
+            parts: this.state.parts,
+            assemblies: this.state.assemblies,
+            machines: this.state.machines,
+            tests: this.state.tests,
+            addPart: this.handleAddPart,
+            addAssembly: this.handleAddAssembly,
+            addMachine: this.handleAddMachine,
+            addTest: this.handleAddTest,
+            updatePart: this.handleUpdatePart,
+            updateAssembly: this.handleUpdateAssembly,
+            updateMachine: this.handleUpdateMachine,
+            deletePart: this.handleDeletePart,
+            deleteAssembly: this.handleDeleteAssembly,
+            deleteMachine: this.handleDeleteMachine,
+        };
         return (
-            // <ApiContext.Provider value={value}>
-            <div className="App">
-                <nav className="App_nav"></nav>
-                <header className="App_header">
-                    <h1>
-                        <Link to="/">Streamline</Link>{" "}
-                    </h1>
-                </header>
-                <main className="App_main">{this.renderMainRoutes()}</main>
-            </div>
-            // </ApiContext.Provider>
+            <ApiContext.Provider value={value}>
+                <div className="App">
+                    <nav className="App_nav"></nav>
+                    <header className="App_header">
+                        <h1>
+                            <Link to="/">Streamline</Link>{" "}
+                        </h1>
+                    </header>
+                    <main className="App_main">{this.renderMainRoutes()}</main>
+                </div>
+            </ApiContext.Provider>
         );
     }
 }

@@ -14,6 +14,8 @@ ul{
 .App_main {
 	background-color: #222233;
 	color: #aaccff;
-	height:100vh
+	min-height: 100vh;
+	height:100%;
+	padding-bottom: 13px;
 }
 

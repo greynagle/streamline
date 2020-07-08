@@ -1,17 +1,68 @@
 import React, { Component } from "react";
+import "./mfg.css";
+import ApiContext from "../ApiContext";
+import config from "../config";
 
 const Required = () => <span className="machine_required">*</span>;
 
 export default class MachineForm extends React.Component {
+    static defaultProps = {
+        history: {
+            goBack: () => {},
+        },
+        match: {
+            params: {},
+        },
+    };
+    static contextType = ApiContext;
     state = {
         error: null,
+        name: "",
+        type: "M",
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // get the form fields from the event
-        // fetch post data
-        alert("Submitted");
+        if (
+            /[^a-zA-Z\d\s]/.test(this.state.name) ||
+            /[^A-Z]/.test(this.state.type)
+        ) {
+            alert("Input Error: Verify input validity");
+        } else {
+            fetch(`${config.API_ENDPOINT}/machines/`, {
+                mode: "cors",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Authorization: `Bearer ${config.API_TOKEN}`,
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    type: this.state.type,
+                    cellid: 0,
+                }),
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        return res.json().then((e) => Promise.reject(e));
+                    }
+                    return res.json();
+                })
+                .then((resJSON) => {
+					console.log(resJSON)
+                    const { id, name, type } = resJSON;
+                    this.context.addMachine({ id, name, type });
+                })
+                .catch((error) => {
+                    console.error({ error });
+                });
+        }
+    };
+
+	handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value,
+        });
     };
 
     handleClickCancel = () => {
@@ -31,36 +82,28 @@ export default class MachineForm extends React.Component {
                     <div>
                         <label htmlFor="name">Machine Name</label>
                         <input
+                            className="new-inputs"
                             type="text"
                             name="name"
                             id="name"
+							onChange={this.handleChange}
                             placeholder="e.g. Okuma"
+							autoComplete="off"
                         />
                     </div>
                     <div>
                         <label htmlFor="type">
                             Machine Type <Required />
                         </label>
-                        <input
-                            type="text"
-                            name="type"
+                        <select
+                            className="new-inputs"
                             id="type"
-                            placeholder="M/T/B/L/O"
-                            maxLength="1"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="tp">
-                            Throughput <Required />
-                        </label>
-                        <input
-                            type="number"
-                            name="tp"
-                            id="tp"
-                            placeholder="e.g. 1.0"
-                            required
-                        />
+                            onChange={this.handleChange}
+                            autoComplete="off"
+                        >
+                            <option value="M">Mill</option>
+                            <option value="T">Lathe</option>
+                        </select>
                     </div>
                     <div className="Button__Array">
                         <button type="button" onClick={this.handleClickCancel}>
@@ -70,18 +113,14 @@ export default class MachineForm extends React.Component {
                     </div>
                 </form>
                 <div className="instructions">
-                    <p>
+                    <br />
+                    <span className="info">
                         Please input all available information.
                         <br />
                         The machine name is used to identify the various
-                        machines.
-                        <br />
-                        The machine type determines what type of operations the
-                        machine performs.
-                        <br />
-                        The throughput determines how many components of
-                        complexity 1.0 can be processed per minute.
-                    </p>
+                        machines. Machine Type determines what type of
+                        operations the machine performs.
+                    </span>
                 </div>
             </section>
         );

@@ -10,9 +10,16 @@ import {
 // import config from "../config";
 import PartForm from "./pdm-prt-form.js";
 import AsmForm from "./pdm-asm-form";
+import PrtTable from "./PrtTable";
+import AsmTable from "./AsmTable";
 import "./pdm.css";
+import ApiContext from "../ApiContext";
+import AsmContents from "./AsmContents";
 
 export default class PDM extends React.Component {
+    static defaultProps = {};
+    static contextType = ApiContext;
+
     render() {
         function Links() {
             let { path, url } = useRouteMatch();
@@ -33,54 +40,20 @@ export default class PDM extends React.Component {
 
                     <Switch>
                         <Route exact path={path}>
-                            <h2>PDM Data</h2>
-                            <span>
-                                The PDM branch is designed for adding
-                                <br />
-                                parts (individual components) and assemblies
-                                (bundles of components).
-                                <br />
-                                Follow the links above to find the proper input
-                                form.
+                            <h2>Data Management</h2>
+                            <span className="info">
+                                The PDM branch is designed for adding parts and
+                                assemblies. Follow the links above to find the
+                                proper input form, or click on the assembly
+                                numbers below to see their contents.
                             </span>
                             <br />
                             <br />
-							<span>Current Data:</span>
-                        
-							<table className="PDM_Table">
-                                <thead>
-                                    <tr>
-                                        <th>PN</th>
-                                        <th>Desc</th>
-                                        <th>SO</th>
-                                        <th>MC</th>
-                                        <th>Comp.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>123000</td>
-                                        <td>Gland</td>
-                                        <td>A276</td>
-                                        <td>TM</td>
-                                        <td>3,1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>123001</td>
-                                        <td>Sleeve</td>
-                                        <td>A276</td>
-                                        <td>TM</td>
-                                        <td>5,1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>123002</td>
-                                        <td>Lock Ring</td>
-                                        <td>A276</td>
-                                        <td>T</td>
-                                        <td>1</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <span>Current Parts:</span>
+                            <PrtTable />
+                            <br />
+                            <span>Current Assemblies:</span>
+                            <AsmTable />
                         </Route>
                         <Route path={`${path}/:formType`}>
                             <Forms />
@@ -99,12 +72,12 @@ export default class PDM extends React.Component {
                 case "asm-form":
                     return <AsmForm />;
                 default:
-                    return <></>;
+                    return <AsmContents id={formType} />;
             }
         }
 
         return (
-            <div className="header">
+            <div className="sub-header">
                 <Links />
             </div>
         );
