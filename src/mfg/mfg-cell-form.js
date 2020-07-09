@@ -14,11 +14,6 @@ export default class CellForm extends React.Component {
         alert("Submitted");
     };
 
-    handleClickCancel = () => {
-        // this.props.history.push("/");
-        alert("Cancelled");
-    };
-
     render() {
         const { error } = this.state;
         return (

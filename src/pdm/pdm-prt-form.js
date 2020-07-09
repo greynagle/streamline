@@ -3,7 +3,6 @@ import "./pdm.css";
 import ApiContext from "../ApiContext";
 import config from "../config";
 
-
 const Required = () => <span className="prt_required">*</span>;
 
 export default class PrtForm extends Component {
@@ -11,7 +10,7 @@ export default class PrtForm extends Component {
         history: {
             goBack: () => {},
         },
-		match: {
+        match: {
             params: {},
         },
     };
@@ -22,17 +21,41 @@ export default class PrtForm extends Component {
         stock: "",
         machine: "M",
         complexity: "",
+		popup:""
     };
+
+	componentDidMount() {
+        let loc = this.context.parts.length - 1;
+        if (loc !== -1) {
+            this.setState({
+                popup: this.context.parts[
+                    loc
+                ].id,
+            });
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (
-            /[^a-zA-Z\d\s,]/.test(this.state.description) ||
-            /[^a-zA-Z\d\s,]/.test(this.state.stock) ||
-            /[^\d,.]/.test(this.state.complexity) || 
-			this.state.machine.split('').length !== this.state.complexity.split(",").length
+        if (/[^a-zA-Z\d\s,]/.test(this.state.description)) {
+            alert(
+                "The description must contain only alphanumeric characters, spaces, and commas"
+            );
+        } else if (/[^a-zA-Z\d\s,]/.test(this.state.stock)) {
+            alert(
+                "The stock must contain only alphanumeric characters, spaces, and commas"
+            );
+        } else if (/[^\d,.]/.test(this.state.complexity)) {
+            alert(
+                "The complexity must be a comma separated list containing only digits, decimals, and commas"
+            );
+        } else if (
+            this.state.machine.split("").length !==
+            this.state.complexity.split(",").length
         ) {
-            alert("Input Error: Verify input validity");
+            alert(
+                "The number of machine operations and number of complexity values must be equal"
+            );
         } else {
             fetch(`${config.API_ENDPOINT}/parts/`, {
                 mode: "cors",
@@ -55,13 +78,21 @@ export default class PrtForm extends Component {
                     return res.json();
                 })
                 .then((resJSON) => {
-                    const {description, id, stock} = resJSON
-					this.context.addPart({description, id, stock});
+                    const { description, id, stock } = resJSON;
+                    this.context.addPart({ description, id, stock });
+                })
+				.then(() => {
+                    this.popup();
                 })
                 .catch((error) => {
                     console.error({ error });
                 });
         }
+    };
+
+	popup = () => {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
     };
 
     handleChange = (e) => {
@@ -75,6 +106,7 @@ export default class PrtForm extends Component {
         return (
             <section className="prt_form">
                 <h2>New Part</h2>
+                <span>Please input all available information</span>
                 <form className="prt_form" onSubmit={this.handleSubmit}>
                     <div className="prt_error" role="alert">
                         {error && <p>{error.message}</p>}
@@ -94,6 +126,7 @@ export default class PrtForm extends Component {
                             required
                         />
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="stock">
                             Stock Origin <Required />
@@ -109,6 +142,7 @@ export default class PrtForm extends Component {
                             required
                         />
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="machine">
                             Machine Code <Required />
@@ -125,6 +159,7 @@ export default class PrtForm extends Component {
                             <option value="TM">Lathe/Mill</option>
                         </select>
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="complexity">
                             Complexity <Required />
@@ -140,20 +175,21 @@ export default class PrtForm extends Component {
                             required
                         />
                     </div>
-                    <div className="Button__Array">
-                        <button type="button" onClick={() => this.props.history.goBack()}>
-                            Cancel
-                        </button>{" "}
+                    <br />
+                    <div className="Button__Array popup">
                         <button type="submit">Submit</button>
+                        <span className="popuptext" id="myPopup">
+                            Part id {this.state.popup} created!
+                        </span>
                     </div>
                 </form>
                 <div className="instructions">
                     <span className="info">
-                        Please input all available information. Description is a
-                        component definition. Stock Origin is the type of raw
-                        material used. Machine Code dictates what machines
-                        process the component. Complexity is a comma separated
-                        list of how many minutes each operation takes.
+                        Description is a component definition. Stock Origin is
+                        the type of raw material used. Machine Code dictates
+                        what machines process the component. Complexity is a
+                        comma separated list of how many minutes each operation
+                        takes.
                     </span>
                 </div>
             </section>

@@ -1,32 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./landing.css"
+import "./landing.css";
 
 export default class Landing extends React.Component {
     render() {
         return (
             <div className="nav_link">
                 <ul>
-                    <li>
-                        <Link to={`/pdm`}>PDM</Link>
+                    <li className="top-link">
+                        <Link to={`/pdm`}>Data</Link>
                     </li>
-                    <li>
+                    <li className="top-link">
                         <Link to={`/mfg`}>Manufacturing</Link>
                     </li>
-                    <li>
-                        <Link to={`/routing`}>Routing</Link>
+                    <li className="top-link">
+                        <Link to={`/routing`}>Testing</Link>
                     </li>
                 </ul>
 
-                <p>
-                    This is a tool to help visualize factory throughput.
-                    Depending on roles,
+                <p className="landing">
+                    Streamline is a tool designed to simulate a manufacturing
+                    process, so a factory can properly allocate resources.
                     <br />
-                    a user can populate the database with components, create
-                    assemblies, or <br />
-                    simulate creating those assemblies in user-defined machining
-                    cells. Follow <br />
-                    the link pertaining to your role for more instructions.
+                    <br />
+                    The Data tab shows all the components that can be tested.
+                    The Manufacturing tab is where users determine how many
+                    resources are available to process components. The Testing
+                    tab is were users select the parts they wish to simulate
+                    processing. <br /> <br /> Please select a tab for further
+                    instruction.
                 </p>
             </div>
         );

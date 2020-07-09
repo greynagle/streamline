@@ -21,12 +21,12 @@ export default class MFG extends React.Component {
             return (
                 <>
                     <ul>
-                        <li>
-                            <Link to={`${url}`}>MFG Data</Link>
+                        <li className="top-link">
+                            <Link to={`${url}`}>Machines</Link>
                         </li>
-                        <li>
+                        <li className="top-link">
                             <Link to={`${url}/mfg-machine-form`}>
-                                New Machine
+                                New Mach.
                             </Link>
                         </li>
                         {/* <li>
@@ -36,12 +36,16 @@ export default class MFG extends React.Component {
 
                     <Switch>
                         <Route exact path={path}>
-                            <h2>MFG Data</h2>
+                            <h2>Machines</h2>
                             <span className="info">
                                 The Manufacturing branch is designed for adding
                                 machines and associated data used to process
-                                parts Follow the links above to find the proper
-                                input form.
+                                parts.
+                                <br />
+                                The table below shows available resources for
+                                processing.
+                                <br />
+                                Follow the link above to add new resources.
                             </span>
                             <br />
                             <br />

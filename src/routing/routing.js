@@ -10,9 +10,8 @@ import {
 // import config from "../config";
 import RoutingForm from "./routing-form";
 import "./routing.css";
-import TestTable from "./TestTable"
+import TestTable from "./TestTable";
 import TestContents from "./TestContents";
-
 
 export default class Routing extends React.Component {
     render() {
@@ -23,31 +22,30 @@ export default class Routing extends React.Component {
                 <>
                     <ul>
                         <li>
-                            <Link to={`${url}`}>Test Data</Link>
+                            <Link to={`${url}`}>History</Link>
                         </li>
                         <li>
-                            <Link to={`${url}/routing-form`}>
-                                New Test
-                            </Link>
+                            <Link to={`${url}/routing-form`}>New Test</Link>
                         </li>
                     </ul>
 
                     <Switch>
                         <Route exact path={path}>
-                            <h2>Test Data</h2>
+                            <h2>History</h2>
                             <span className="info">
                                 The Routing branch is used to simulate
                                 production to estimate throughput and allocate
                                 resources.
                                 <br />
-                                Follow the link above to define a test, or
-                                select one of the tests below to view the
-                                historical data.
+                                The table below shows the testing history. Click
+                                the test number to see the full test data.
+								<br/>
+                                Follow the link above to run a new test.
                             </span>
                             <br />
                             <br />
                             Test History:
-                            <TestTable/>
+                            <TestTable />
                         </Route>
                         <Route path={`${path}/:formType`}>
                             <Forms />
@@ -64,7 +62,7 @@ export default class Routing extends React.Component {
                 case "routing-form":
                     return <RoutingForm />;
                 default:
-                    return <TestContents id={formType}/>;
+                    return <TestContents id={formType} />;
             }
         }
 

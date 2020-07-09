@@ -28,7 +28,7 @@ export default class TestContents extends Component {
                 return data.json();
             })
             .then((asmContents) => {
-                console.log(asmContents)
+                // console.log(asmContents)
 				const { testAsm, testMach} = asmContents;
 				this.setState({ testAsm, testMach });
             });

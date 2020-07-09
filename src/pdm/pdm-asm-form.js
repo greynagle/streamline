@@ -19,7 +19,19 @@ export default class AsmForm extends Component {
         error: null,
         description: "",
         contents: "",
+        popup: "",
     };
+
+    componentDidMount() {
+        let loc = this.context.assemblies.length - 1;
+        if (loc !== -1) {
+            this.setState({
+                popup: this.context.assemblies[
+                    loc
+                ].id,
+            });
+        }
+    }
 
     testContents = () => {
         let truthiness = false;
@@ -38,13 +50,16 @@ export default class AsmForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (
-            /[^a-zA-Z\d\s,]/.test(this.state.description) ||
-            /[^\d,]/.test(this.state.contents)
-        ) {
-            alert("Input Error: Verify input validity");
+        if (/[^a-zA-Z\d\s,]/.test(this.state.description)) {
+            alert(
+                "The description must contain only alphanumeric characters, spaces, or commas"
+            );
+        } else if (/[^\d,]/.test(this.state.contents)) {
+            alert(
+                "The contents must be a comma separated list containing only digits and commas without spaces"
+            );
         } else if (this.testContents()) {
-        	alert("Part number does not exist")
+            alert("One of the part numbers does not exist");
         } else {
             fetch(`${config.API_ENDPOINT}/assemblies/`, {
                 mode: "cors",
@@ -65,18 +80,17 @@ export default class AsmForm extends Component {
                     return res.json();
                 })
                 .then((resJSON) => {
-					const { description, id } = resJSON;
+                    const { description, id } = resJSON;
+                    this.setState({ popup: id });
                     this.context.addAssembly({ description, id });
+                })
+                .then(() => {
+                    this.popup();
                 })
                 .catch((error) => {
                     console.error({ error });
                 });
         }
-    };
-
-    handleClickCancel = () => {
-        // this.props.history.push("/");
-        alert("Cancelled");
     };
 
     handleChange = (e) => {
@@ -85,15 +99,22 @@ export default class AsmForm extends Component {
         });
     };
 
+    popup = () => {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    };
+
     render() {
         const { error } = this.state;
         return (
             <section className="asm_form">
                 <h2>New Assembly</h2>
+                <span>Please input all available information</span>
                 <form className="asm_form" onSubmit={this.handleSubmit}>
                     <div className="asm_error" role="alert">
                         {error && <p>{error.message}</p>}
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="description">
                             Description <Required />
@@ -109,6 +130,7 @@ export default class AsmForm extends Component {
                             required
                         />
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="contents">
                             Contents (cs) <Required />
@@ -123,18 +145,18 @@ export default class AsmForm extends Component {
                             required
                         />
                     </div>
-                    <div className="Button__Array">
-                        <button type="button" onClick={this.handleClickCancel}>
-                            Cancel
-                        </button>{" "}
+                    <br />
+                    <div className="Button__Array popup">
                         <button type="submit">Submit</button>
+                        <span className="popuptext" id="myPopup">
+                            Assembly id {this.state.popup} created!
+                        </span>
                     </div>
                 </form>
                 <div className="instructions">
                     <span className="info">
-                        Please input all available information. Description is a
-                        component definition. Contents is a comma-separated list
-                        of six-digit part numbers.
+                        Description is a component definition. Contents is a
+                        comma-separated list of six-digit part numbers.
                     </span>
                 </div>
             </section>

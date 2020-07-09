@@ -27,33 +27,34 @@ export default class PDM extends React.Component {
             return (
                 <>
                     <ul>
-                        <li>
-                            <Link to={`${url}`}>PDM Data</Link>
+                        <li className="top-link">
+                            <Link to={`${url}`}>Data</Link>
                         </li>
-                        <li>
+                        <li className="top-link">
                             <Link to={`${url}/prt-form`}>New Part</Link>
                         </li>
-                        <li>
-                            <Link to={`${url}/asm-form`}>New Assembly</Link>
+                        <li className="top-link">
+                            <Link to={`${url}/asm-form`}>New Asm.</Link>
                         </li>
                     </ul>
 
                     <Switch>
                         <Route exact path={path}>
                             <h2>Data Management</h2>
-                            <span className="info">
+                            <p className="info">
                                 The PDM branch is designed for adding parts and
                                 assemblies. Follow the links above to find the
                                 proper input form, or click on the assembly
                                 numbers below to see their contents.
-                            </span>
+                            </p>
                             <br />
                             <br />
-                            <span>Current Parts:</span>
+                            <span>Available Assemblies:</span>
+                            <AsmTable />
+							<br/>
+							<span>Available Parts:</span>
                             <PrtTable />
                             <br />
-                            <span>Current Assemblies:</span>
-                            <AsmTable />
                         </Route>
                         <Route path={`${path}/:formType`}>
                             <Forms />

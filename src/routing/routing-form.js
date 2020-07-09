@@ -18,7 +18,19 @@ export default class RoutingForm extends React.Component {
     state = {
         error: null,
         contents: "",
+		popup: ""
     };
+
+	componentDidMount() {
+        let loc = this.context.tests.length - 1;
+        if (loc !== -1) {
+            this.setState({
+                popup: this.context.tests[
+                    loc
+                ].id,
+            });
+        }
+    }
 
     testContents = () => {
         let truthiness = false;
@@ -36,9 +48,11 @@ export default class RoutingForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (/[^\d,]/.test(this.state.contents)) {
-            alert("Input Error: Verify input validity");
+            alert(
+                "The contents must contain only digits and commas without spacing"
+            );
         } else if (this.testContents()) {
-            alert("Assembly number does not exist");
+            alert("One of the assembly numbers does not exist");
         } else {
             fetch(`${config.API_ENDPOINT}/tests/`, {
                 mode: "cors",
@@ -58,9 +72,12 @@ export default class RoutingForm extends React.Component {
                     return res.json();
                 })
                 .then((resJSON) => {
-                    console.log(resJSON)
-					// const { description, id } = resJSON;
-                    // this.context.addAssembly({ description, id });
+                    // console.log(resJSON);
+                    const { batchtime, rundate, id } = resJSON;
+                    this.context.addTest({ batchtime, rundate, id });
+                })
+				.then(() => {
+                    this.popup();
                 })
                 .catch((error) => {
                     console.error({ error });
@@ -68,12 +85,12 @@ export default class RoutingForm extends React.Component {
         }
     };
 
-    handleClickCancel = () => {
-        // this.props.history.push("/");
-        alert("Cancelled");
+	popup = () => {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
     };
 
-	handleChange = (e) => {
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         });
@@ -89,6 +106,7 @@ export default class RoutingForm extends React.Component {
                         <div className="routing_error" role="alert">
                             {error && <p>{error.message}</p>}
                         </div>
+                        <br />
                         <div>
                             <label htmlFor="content">
                                 Asm. Numbers <Required />
@@ -99,27 +117,25 @@ export default class RoutingForm extends React.Component {
                                 id="contents"
                                 cols="7"
                                 rows="1"
-								autoComplete="off"
-								onChange={this.handleChange}
+                                autoComplete="off"
+                                onChange={this.handleChange}
                                 required
                             />
                         </div>
-                        <div className="Button__Array">
-                            <button
-                                type="button"
-                                onClick={this.handleClickCancel}
-                            >
-                                Cancel
-                            </button>{" "}
-                            <button type="submit">Submit</button>
-                        </div>
+                        <br />
+                        <div className="Button__Array popup">
+                        <button type="submit">Submit</button>
+                        <span className="popuptext" id="myPopup">
+                            Test id {this.state.popup} created!
+                        </span>
+                    </div>
                     </form>
                 </section>
                 <div className="instructions">
                     <p>
                         Assembly number is a comma-separated list of assemblies.
                         The test will use all available machines without
-                        preference. 
+                        preference.
                     </p>
                 </div>
             </>

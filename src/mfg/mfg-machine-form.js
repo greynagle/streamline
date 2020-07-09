@@ -19,7 +19,19 @@ export default class MachineForm extends React.Component {
         error: null,
         name: "",
         type: "M",
+		popup: ""
     };
+
+	componentDidMount() {
+        let loc = this.context.machines.length - 1;
+        if (loc !== -1) {
+            this.setState({
+                popup: this.context.machines[
+                    loc
+                ].id,
+            });
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -49,9 +61,12 @@ export default class MachineForm extends React.Component {
                     return res.json();
                 })
                 .then((resJSON) => {
-					console.log(resJSON)
+                    // console.log(resJSON)
                     const { id, name, type } = resJSON;
                     this.context.addMachine({ id, name, type });
+                })
+				.then(() => {
+                    this.popup();
                 })
                 .catch((error) => {
                     console.error({ error });
@@ -59,26 +74,28 @@ export default class MachineForm extends React.Component {
         }
     };
 
-	handleChange = (e) => {
+	popup = () => {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    };
+
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
         });
-    };
-
-    handleClickCancel = () => {
-        // this.props.history.push("/");
-        alert("Cancelled");
     };
 
     render() {
         const { error } = this.state;
         return (
             <section className="machine_form">
-                <h2>Add a new machine</h2>
+                <h2>New Machine</h2>
+                <span>Please input all available information</span>
                 <form className="machine_form" onSubmit={this.handleSubmit}>
                     <div className="machine_error" role="alert">
                         {error && <p>{error.message}</p>}
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="name">Machine Name</label>
                         <input
@@ -86,11 +103,12 @@ export default class MachineForm extends React.Component {
                             type="text"
                             name="name"
                             id="name"
-							onChange={this.handleChange}
+                            onChange={this.handleChange}
                             placeholder="e.g. Okuma"
-							autoComplete="off"
+                            autoComplete="off"
                         />
                     </div>
+                    <br />
                     <div>
                         <label htmlFor="type">
                             Machine Type <Required />
@@ -105,18 +123,17 @@ export default class MachineForm extends React.Component {
                             <option value="T">Lathe</option>
                         </select>
                     </div>
-                    <div className="Button__Array">
-                        <button type="button" onClick={this.handleClickCancel}>
-                            Cancel
-                        </button>{" "}
+                    <br />
+                   <div className="Button__Array popup">
                         <button type="submit">Submit</button>
+                        <span className="popuptext" id="myPopup">
+                            Machine id {this.state.popup} created!
+                        </span>
                     </div>
                 </form>
                 <div className="instructions">
                     <br />
                     <span className="info">
-                        Please input all available information.
-                        <br />
                         The machine name is used to identify the various
                         machines. Machine Type determines what type of
                         operations the machine performs.
