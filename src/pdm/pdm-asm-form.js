@@ -22,7 +22,8 @@ export default class AsmForm extends Component {
         popup: "",
     };
 
-    componentDidMount() {
+    // grabs the latest assembly id for use in the "success" popup
+	componentDidMount() {
         let loc = this.context.assemblies.length - 1;
         if (loc !== -1) {
             this.setState({
@@ -33,13 +34,12 @@ export default class AsmForm extends Component {
         }
     }
 
-    testContents = () => {
+    // checks the part number exists
+	testContents = () => {
         let truthiness = false;
         const partIds = this.context.parts.map((val) => {
             return val.id;
         });
-        // console.log(partIds);
-        // console.log(this.state.contents.split(","));
         this.state.contents.split(",").forEach((elem) => {
             if (!partIds.includes(Number(elem))) {
                 truthiness = true;
@@ -50,7 +50,8 @@ export default class AsmForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (/[^a-zA-Z\d\s,]/.test(this.state.description)) {
+        // verification, sends new assembly, returns new asm. info
+		if (/[^a-zA-Z\d\s,]/.test(this.state.description)) {
             alert(
                 "The description must contain only alphanumeric characters, spaces, or commas"
             );
@@ -66,7 +67,6 @@ export default class AsmForm extends Component {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${config.API_TOKEN}`,
                 },
                 body: JSON.stringify({
                     description: this.state.description,

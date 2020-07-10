@@ -24,6 +24,7 @@ export default class PrtForm extends Component {
 		popup:""
     };
 
+	// grabs latest part for success popup
 	componentDidMount() {
         let loc = this.context.parts.length - 1;
         if (loc !== -1) {
@@ -37,7 +38,8 @@ export default class PrtForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (/[^a-zA-Z\d\s,]/.test(this.state.description)) {
+        // verify, post new part, return new part info
+		if (/[^a-zA-Z\d\s,]/.test(this.state.description)) {
             alert(
                 "The description must contain only alphanumeric characters, spaces, and commas"
             );
@@ -62,7 +64,6 @@ export default class PrtForm extends Component {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${config.API_TOKEN}`,
                 },
                 body: JSON.stringify({
                     description: this.state.description,

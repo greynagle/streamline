@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import ApiContext from "../ApiContext";
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Switch,
-    useParams,
-    useRouteMatch,
-} from "react-router-dom";
+import { Route, Link, useRouteMatch } from "react-router-dom";
 import AsmContents from "./AsmContents";
 
 export default class AsmTable extends Component {
     static defaultProps = {};
     static contextType = ApiContext;
 
+    // generates the table visible on the "Data" tab, with links to contents provided by AsmContents
     render() {
         const { assemblies } = this.context;
-        // console.log(assemblies)
         const Contents = (props) => {
             let { path, url } = useRouteMatch();
             return (

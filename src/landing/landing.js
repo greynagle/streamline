@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import "./landing.css";
 
 export default class Landing extends React.Component {
-    render() {
+    // The load-in page
+	
+	render() {
         return (
             <div className="nav_link">
                 <ul>

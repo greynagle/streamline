@@ -5,7 +5,7 @@ import config from "../config";
 
 const Required = () => <span className="machine_required">*</span>;
 
-export default class MachineForm extends React.Component {
+export default class MachineForm extends Component {
     static defaultProps = {
         history: {
             goBack: () => {},
@@ -19,34 +19,29 @@ export default class MachineForm extends React.Component {
         error: null,
         name: "",
         type: "M",
-		popup: ""
+        popup: "",
     };
 
-	componentDidMount() {
+    componentDidMount() {
         let loc = this.context.machines.length - 1;
         if (loc !== -1) {
             this.setState({
-                popup: this.context.machines[
-                    loc
-                ].id,
+                popup: this.context.machines[loc].id,
             });
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (
-            /[^a-zA-Z\d\s]/.test(this.state.name) ||
-            /[^A-Z]/.test(this.state.type)
-        ) {
-            alert("Input Error: Verify input validity");
+        if (/[^a-zA-Z\d\s]/.test(this.state.name)) {
+            alert("The machine name must be alphanumeric");
         } else {
-            fetch(`${config.API_ENDPOINT}/machines/`, {
+            // posting the new machine data, and returns the new data in the .thens
+			fetch(`${config.API_ENDPOINT}/machines/`, {
                 mode: "cors",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${config.API_TOKEN}`,
                 },
                 body: JSON.stringify({
                     name: this.state.name,
@@ -61,11 +56,10 @@ export default class MachineForm extends React.Component {
                     return res.json();
                 })
                 .then((resJSON) => {
-                    // console.log(resJSON)
                     const { id, name, type } = resJSON;
                     this.context.addMachine({ id, name, type });
                 })
-				.then(() => {
+                .then(() => {
                     this.popup();
                 })
                 .catch((error) => {
@@ -74,6 +68,7 @@ export default class MachineForm extends React.Component {
         }
     };
 
+    // shows the alert for successful return
 	popup = () => {
         var popup = document.getElementById("myPopup");
         popup.classList.toggle("show");
@@ -124,7 +119,7 @@ export default class MachineForm extends React.Component {
                         </select>
                     </div>
                     <br />
-                   <div className="Button__Array popup">
+                    <div className="Button__Array popup">
                         <button type="submit">Submit</button>
                         <span className="popuptext" id="myPopup">
                             Machine id {this.state.popup} created!

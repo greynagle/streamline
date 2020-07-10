@@ -21,14 +21,14 @@ export default class TestContents extends Component {
     }
     static contextType = ApiContext;
 
-    componentDidMount() {
+    // grabs the contents of the tests
+	componentDidMount() {
         fetch(`${config.API_ENDPOINT}/tests/${this.props.id}`)
             .then((data) => {
                 if (!data.ok) return data.json().then((e) => Promise.reject(e));
                 return data.json();
             })
             .then((asmContents) => {
-                // console.log(asmContents)
 				const { testAsm, testMach} = asmContents;
 				this.setState({ testAsm, testMach });
             });

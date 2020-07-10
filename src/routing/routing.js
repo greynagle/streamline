@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import {
-    BrowserRouter as Router,
     Route,
     Link,
     Switch,
     useParams,
     useRouteMatch,
 } from "react-router-dom";
-// import config from "../config";
 import RoutingForm from "./routing-form";
 import "./routing.css";
 import TestTable from "./TestTable";
 import TestContents from "./TestContents";
 
-export default class Routing extends React.Component {
+export default class Routing extends Component {
     render() {
+        // a function to render the various routing options for the testing path
         function Links() {
             let { path, url } = useRouteMatch();
 
@@ -39,7 +38,7 @@ export default class Routing extends React.Component {
                                 <br />
                                 The table below shows the testing history. Click
                                 the test number to see the full test data.
-								<br/>
+                                <br />
                                 Follow the link above to run a new test.
                             </span>
                             <br />

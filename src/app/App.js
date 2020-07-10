@@ -47,30 +47,15 @@ class App extends Component {
                 ]);
             })
             .then(([parts, assemblies, machines, tests]) => {
-                // console.log(parts);
-                this.setState({ parts, assemblies, machines, tests });
+                //setting the initial data 
+				this.setState({ parts, assemblies, machines, tests });
             })
             .catch((error) => {
                 console.error({ error });
             });
     }
 
-    // renderNavRoutes() {
-    //     return (
-    //         <>
-    //             {/* for root and folders*/}
-    //             {["/", "/folder/:folderId"].map((path) => (
-    //                 <Route
-    //                     exact
-    //                     key={path}
-    //                     path={path}
-    //                     component={<div></div>}
-    //                 />
-    //             ))}
-    //         </>
-    //     );
-    // }
-
+	// The main branches of the app
     renderMainRoutes() {
         return (
             <>
@@ -82,6 +67,7 @@ class App extends Component {
         );
     }
 
+	// the handles, to be passed to the context
     handleAddPart = (part) => {
         this.setState({
             parts: [...this.state.parts, part],
@@ -105,24 +91,7 @@ class App extends Component {
             tests: [...this.state.tests, test],
         });
     };
-
-    handleDeletePart = (partId) => {
-        this.setState({
-            parts: this.state.parts.filter((part) => part.id !== partId),
-        });
-    };
-
-	handleDeleteAssembly = (asmId) => {
-        this.setState({
-            assemblies: this.state.assemblies.filter((asm) => asm.id !== asmId),
-        });
-    };
-
-	handleDeleteMachine = (macId) => {
-        this.setState({
-            machines: this.state.machines.filter((mac) => mac.id !== macId),
-        });
-    };
+	// end handles
 
     render() {
         const value = {
@@ -134,12 +103,6 @@ class App extends Component {
             addAssembly: this.handleAddAssembly,
             addMachine: this.handleAddMachine,
             addTest: this.handleAddTest,
-            updatePart: this.handleUpdatePart,
-            updateAssembly: this.handleUpdateAssembly,
-            updateMachine: this.handleUpdateMachine,
-            deletePart: this.handleDeletePart,
-            deleteAssembly: this.handleDeleteAssembly,
-            deleteMachine: this.handleDeleteMachine,
         };
         return (
             <ApiContext.Provider value={value}>

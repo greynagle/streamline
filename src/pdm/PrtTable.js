@@ -14,7 +14,6 @@ export default class PrtTable extends Component {
                     <tr>
                         <th>Part #</th>
                         <th>Desc</th>
-                        {/* <th>S.O.</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +22,6 @@ export default class PrtTable extends Component {
                             <tr key={ind}>
                                 <td>{val.id}</td>
                                 <td>{val.description}</td>
-                                {/* <td>{val.stock.split(',')[1]}</td> */}
                             </tr>
                         );
                     })}

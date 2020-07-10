@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import {
-    BrowserRouter as Router,
     Route,
     Link,
     Switch,
     useParams,
     useRouteMatch,
 } from "react-router-dom";
-import config from "../config";
 import MfgMachineForm from "./mfg-machine-form";
-// import MfgCellForm from "./mfg-cell-form";
 import "./mfg.css";
 import MfgTable from "./MfgTable";
 
-export default class MFG extends React.Component {
+export default class MFG extends Component {
+    // a function to render the various routing options for the manufacturing path
+
     render() {
         function Links() {
             let { path, url } = useRouteMatch();
@@ -29,9 +28,6 @@ export default class MFG extends React.Component {
                                 New Mach.
                             </Link>
                         </li>
-                        {/* <li>
-                            <Link to={`${url}/mfg-cell-form`}>New Cell</Link>
-                        </li> */}
                     </ul>
 
                     <Switch>
@@ -66,8 +62,6 @@ export default class MFG extends React.Component {
             switch (formType) {
                 case "mfg-machine-form":
                     return <MfgMachineForm />;
-                // case "mfg-cell-form":
-                //     return <MfgCellForm />;
                 default:
                     return <></>;
             }

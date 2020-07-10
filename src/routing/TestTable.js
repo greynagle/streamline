@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import ApiContext from "../ApiContext";
 import {
-    BrowserRouter as Router,
     Route,
     Link,
-    Switch,
-    useParams,
     useRouteMatch,
 } from "react-router-dom";
 import TestContents from "./TestContents";
@@ -14,7 +11,8 @@ export default class TestTable extends Component {
     static defaultProps = {};
     static contextType = ApiContext;
 
-    render() {
+    // generates the table visible on the "tests" tab, with links to specifics provided by TestContents
+	render() {
         const { tests } = this.context;
         const Contents = (props) => {
             let { path, url } = useRouteMatch();

@@ -5,7 +5,7 @@ import config from "../config";
 
 const Required = () => <span className="routing_required">*</span>;
 
-export default class RoutingForm extends React.Component {
+export default class RoutingForm extends Component {
     static defaultProps = {
         history: {
             goBack: () => {},
@@ -21,6 +21,7 @@ export default class RoutingForm extends React.Component {
 		popup: ""
     };
 
+	// grabs the latest test id for success popup
 	componentDidMount() {
         let loc = this.context.tests.length - 1;
         if (loc !== -1) {
@@ -32,7 +33,8 @@ export default class RoutingForm extends React.Component {
         }
     }
 
-    testContents = () => {
+    // checks the assemblies exist
+	testContents = () => {
         let truthiness = false;
         const asmIds = this.context.assemblies.map((val) => {
             return val.id;
@@ -47,7 +49,8 @@ export default class RoutingForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (/[^\d,]/.test(this.state.contents)) {
+        // verification, sends new test, returns test id
+		if (/[^\d,]/.test(this.state.contents)) {
             alert(
                 "The contents must contain only digits and commas without spacing"
             );
@@ -59,7 +62,6 @@ export default class RoutingForm extends React.Component {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${config.API_TOKEN}`,
                 },
                 body: JSON.stringify({
                     contents: this.state.contents.split(","),

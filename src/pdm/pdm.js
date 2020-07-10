@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import {
-    BrowserRouter as Router,
     Route,
     Link,
     Switch,
     useParams,
     useRouteMatch,
 } from "react-router-dom";
-// import config from "../config";
 import PartForm from "./pdm-prt-form.js";
 import AsmForm from "./pdm-asm-form";
 import PrtTable from "./PrtTable";
@@ -16,11 +14,13 @@ import "./pdm.css";
 import ApiContext from "../ApiContext";
 import AsmContents from "./AsmContents";
 
-export default class PDM extends React.Component {
+export default class PDM extends Component {
     static defaultProps = {};
     static contextType = ApiContext;
 
     render() {
+        // a function to render the various routing options for the data management path
+
         function Links() {
             let { path, url } = useRouteMatch();
 
@@ -42,17 +42,18 @@ export default class PDM extends React.Component {
                         <Route exact path={path}>
                             <h2>Data Management</h2>
                             <p className="info">
-                                The PDM branch is designed for adding parts and
-                                assemblies. Follow the links above to find the
-                                proper input form, or click on the assembly
-                                numbers below to see their contents.
+                                The Data Management branch is designed for
+                                adding parts and assemblies. Follow the links
+                                above to find the proper input form, or click on
+                                the assembly numbers below to see their
+                                contents.
                             </p>
                             <br />
                             <br />
                             <span>Available Assemblies:</span>
                             <AsmTable />
-							<br/>
-							<span>Available Parts:</span>
+                            <br />
+                            <span>Available Parts:</span>
                             <PrtTable />
                             <br />
                         </Route>

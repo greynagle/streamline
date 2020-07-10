@@ -5,7 +5,8 @@ export default class MfgTable extends Component {
     static defaultProps = {};
     static contextType = ApiContext;
 
-    render() {
+    // a function to generate the table displayed in the "machines" tab
+	render() {
         const { machines } = this.context;
 
         return (

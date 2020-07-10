@@ -1,13 +1,5 @@
 import React, { Component } from "react";
 import ApiContext from "../ApiContext";
-// import {
-//     BrowserRouter as Router,
-//     Route,
-//     Link,
-//     Switch,
-//     useParams,
-//     useRouteMatch,
-// } from "react-router-dom";
 import config from "../config";
 
 export default class AsmContents extends Component {
@@ -20,7 +12,8 @@ export default class AsmContents extends Component {
     }
     static contextType = ApiContext;
 
-    componentDidMount() {
+    // grabs the contents of the assemblies
+	componentDidMount() {
         fetch(`${config.API_ENDPOINT}/assemblies/${this.props.id}`)
             .then((data) => {
                 if (!data.ok) return data.json().then((e) => Promise.reject(e));
