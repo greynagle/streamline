@@ -6,43 +6,43 @@ API repo: https://github.com/greynagle/streamline-api
 
 Landing page:
 
-![landing](./images/landing.png)
+![landing](https://github.com/greynagle/streamline/blob/master/images/landing.png)
 
 New Part Form
 
-![new part form](./images/newprt.png)
+![new part form](https://github.com/greynagle/streamline/blob/master/images/newprt.png)
 
 Component Tables
 
-![available components](./images/Data.png)
+![available components](https://github.com/greynagle/streamline/blob/master/images/Data.png)
 
 New Assembly Form
 
-![new assembly form](./images/newasm.png)
+![new assembly form](https://github.com/greynagle/streamline/blob/master/images/newasm.png)
 
 Contents of Assembly
 
-![assembly contents](./images/asmcon.png)
+![assembly contents](https://github.com/greynagle/streamline/blob/master/images/asmcon.png)
 
 New Machine Form
 
-![new machine form](./images/newmach.png)
+![new machine form](https://github.com/greynagle/streamline/blob/master/images/newmach.png)
 
 Machine Table
 
-![machine data](./images/mach.png)
+![machine data](https://github.com/greynagle/streamline/blob/master/images/mach.png)
 
 New Test Form
 
-![new test form](./images/newtest.png)
+![new test form](https://github.com/greynagle/streamline/blob/master/images/newtest.png)
 
 Test History Table
 
-![testing history](./images/testhist.png)
+![testing history](https://github.com/greynagle/streamline/blob/master/images/testhist.png)
 
 Test Contents
 
-![test contents](./images/testcon.png)
+![test contents](https://github.com/greynagle/streamline/blob/master/images/testcon.png)
 
 _______________________________________
 
