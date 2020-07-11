@@ -31,7 +31,7 @@ New Machine Form
 
 Machine Table
 
-![Machine Table](https://user-images.githubusercontent.com/52943441/87214620-4990e080-c2fc-11ea-856f-989d4dc3dc6d.png)
+![Machine table](https://user-images.githubusercontent.com/52943441/87214728-3d595300-c2fd-11ea-89b9-137147c13910.png)
 
 New Test Form
 
