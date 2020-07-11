@@ -6,43 +6,43 @@ API repo: https://github.com/greynagle/streamline-api
 
 Landing page:
 
-![landing](https://github.com/greynagle/streamline/blob/master/images/landing.png)
+![landing](https://raw.githubusercontent.com/greynagle/streamline/master/images/landing.png)
 
 New Part Form
 
-![new part form](https://github.com/greynagle/streamline/blob/master/images/newprt.png)
+![new part form](https://raw.githubusercontent.com/greynagle/streamline/master/images/newprt.png)
 
 Component Tables
 
-![available components](https://github.com/greynagle/streamline/blob/master/images/Data.png)
+![available components](https://raw.githubusercontent.com/greynagle/streamline/master/images/Data.png)
 
 New Assembly Form
 
-![new assembly form](https://github.com/greynagle/streamline/blob/master/images/newasm.png)
+![new assembly form](https://raw.githubusercontent.com/greynagle/streamline/master/images/newasm.png)
 
 Contents of Assembly
 
-![assembly contents](https://github.com/greynagle/streamline/blob/master/images/asmcon.png)
+![assembly contents](https://raw.githubusercontent.com/greynagle/streamline/master/images/asmcon.png)
 
 New Machine Form
 
-![new machine form](https://github.com/greynagle/streamline/blob/master/images/newmach.png)
+![new machine form](https://raw.githubusercontent.com/greynagle/streamline/master/images/newmach.png)
 
 Machine Table
 
-![machine data](https://github.com/greynagle/streamline/blob/master/images/mach.png)
+![machine data](https://raw.githubusercontent.com/greynagle/streamline/master/images/mach.png)
 
 New Test Form
 
-![new test form](https://github.com/greynagle/streamline/blob/master/images/newtest.png)
+![new test form](https://raw.githubusercontent.com/greynagle/streamline/master/images/newtest.png)
 
 Test History Table
 
-![testing history](https://github.com/greynagle/streamline/blob/master/images/testhist.png)
+![testing history](https://raw.githubusercontent.com/greynagle/streamline/master/images/testhist.png)
 
 Test Contents
 
-![test contents](https://github.com/greynagle/streamline/blob/master/images/testcon.png)
+![test contents](https://raw.githubusercontent.com/greynagle/streamline/master/images/testcon.png)
 
 _______________________________________
 
