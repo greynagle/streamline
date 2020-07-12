@@ -9,13 +9,13 @@ export default class Landing extends React.Component {
         return (
             <div className="nav_link">
                 <ul>
-                    <li className="top-link">
+                    <li className="top-link data-tab">
                         <Link to={`/pdm`}>Data</Link>
                     </li>
-                    <li className="top-link">
+                    <li className="top-link mfg-tab">
                         <Link to={`/mfg`}>Manufacturing</Link>
                     </li>
-                    <li className="top-link">
+                    <li className="top-link tst-tab">
                         <Link to={`/routing`}>Testing</Link>
                     </li>
                 </ul>

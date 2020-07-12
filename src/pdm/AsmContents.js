@@ -16,7 +16,9 @@ export default class AsmContents extends Component {
 	componentDidMount() {
         fetch(`${config.API_ENDPOINT}/assemblies/${this.props.id}`)
             .then((data) => {
-                if (!data.ok) return data.json().then((e) => Promise.reject(e));
+                console.log(data)
+				debugger
+				if (!data.ok) return data.json().then((e) => Promise.reject(e));
                 return data.json();
             })
             .then((asmContents) => {
