@@ -1,35 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Table from "../mfg/MfgTable";
 import { mount } from "enzyme";
+import { BrowserRouter as Router } from "react-router-dom";
 import ApiContext from "../ApiContext";
 
-describe("App test", () => {
-    it("renders without crashing", () => {
-        const app = mount(<Table />);
-        const div = document.createElement("div");
-        ReactDOM.render(app, div);
-        ReactDOM.unmountComponentAtNode(div);
-    });
-
-    it("allows context?", () => {
-        const values = {
+describe("Mfg Table test", () => {
+    it("Test component renders with machine data", () => {
+        const mockValues = {
             machines: [
-                { id: 1, name: "HAAS", type: "M" },
-                { id: 2, name: "OKUMA", type: "M" },
-                { id: 3, name: "MAZAK", type: "M" },
-                { id: 4, name: "DELTA", type: "T" },
-                { id: 5, name: "JET", type: "T" },
-            ],
+                { id: 1, name: "Test Machine1", type: 'M' },
+                { id: 2, name: "Test Machine2", type: 'L' },
+                { id: 3, name: "Test Machine3", type: 'M' },
+                { id: 4, name: "Test Machine4", type: 'L' },
+                { id: 5, name: "Test Machine5", type: 'M' }
+            ]
         };
 
         const app = mount(
-            <ApiContext.Provider value={values}>
-                <Table />
-            </ApiContext.Provider>
+          <Router>
+              <ApiContext.Provider value={mockValues}>
+                  <Table />
+              </ApiContext.Provider>
+          </Router>
         );
-        const div = document.createElement("div");
-        ReactDOM.render(app, div);
-        ReactDOM.unmountComponentAtNode(div);
+        expect(app.find('.MFG_Table').first().exists).toBeTruthy();
+        expect(app.find('.machine').length).toBe(mockValues.machines.length);
+        app.unmount()
     });
 });

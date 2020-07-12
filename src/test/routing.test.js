@@ -1,18 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import Routing from "../routing/routing";
+import React from "react";
 import { mount } from 'enzyme'
 import { BrowserRouter as Router } from "react-router-dom";
 
-describe("App test", () => {
-    it("renders without crashing", () => {
+describe("Routing Page test", () => {
+    it("renders landing page text without crashing", () => {
         const app = mount(
-            <Router>
-                <Routing />
-            </Router>
+          <Router>
+              <Routing />
+          </Router>
         );
-        const div = document.createElement("div");
-        ReactDOM.render(app, div);
-        ReactDOM.unmountComponentAtNode(div);
+        expect(app.find('.info').first().exists).toBeTruthy();
+        app.unmount()
     });
 });

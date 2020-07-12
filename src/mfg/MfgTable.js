@@ -21,7 +21,7 @@ export default class MfgTable extends Component {
                 <tbody>
                     {machines.map((val, ind) => {
                         return (
-                            <tr key={ind}>
+                            <tr key={ind} className="machine">
                                 <td>{val.id}</td>
                                 <td>{val.name}</td>
                                 <td>{val.type}</td>

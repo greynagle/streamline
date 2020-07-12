@@ -1,18 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Mfg from "../mfg/mfg";
 import { mount } from 'enzyme'
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from 'react-router';
 
-describe("App test", () => {
+describe("Mfg home page test", () => {
     it("renders without crashing", () => {
         const app = mount(
-            <Router>
+            <Router initialEntries={['/mfg']}>
                 <Mfg />
             </Router>
         );
-        const div = document.createElement("div");
-        ReactDOM.render(app, div);
-        ReactDOM.unmountComponentAtNode(div);
+        expect(app.find('.info').first().exists).toBeTruthy();
+        expect(app.find('.top-link').length).toBe(2);
+        app.unmount()
     });
 });

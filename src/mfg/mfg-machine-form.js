@@ -120,7 +120,7 @@ export default class MachineForm extends Component {
                     </div>
                     <br />
                     <div className="Button__Array popup">
-                        <button type="submit">Submit</button>
+                        <button className="submit-machine" type="submit">Submit</button>
                         <span className="popuptext" id="myPopup">
                             Machine id {this.state.popup} created!
                         </span>

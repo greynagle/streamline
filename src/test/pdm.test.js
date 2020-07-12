@@ -1,18 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Pdm from "../pdm/pdm";
-import { mount } from 'enzyme'
 import { BrowserRouter as Router } from "react-router-dom";
+import { mount } from 'enzyme'
 
-describe("App test", () => {
-    it("renders without crashing", () => {
+describe("Pdm Page test", () => {
+    it("renders pdm page text without crashing", () => {
         const app = mount(
-            <Router>
-                <Pdm />
-            </Router>
+          <Router>
+              <Pdm />
+          </Router>
         );
-        const div = document.createElement("div");
-        ReactDOM.render(app, div);
-        ReactDOM.unmountComponentAtNode(div);
+        expect(app.find('.info').first().exists).toBeTruthy();
+        expect(app.find('.top-link').length).toBe(3);
+        app.unmount()
     });
 });

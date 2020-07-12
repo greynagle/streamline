@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ApiContext from "../ApiContext";
 import { Route, Link, useRouteMatch } from "react-router-dom";
 import AsmContents from "./AsmContents";
+import PropTypes from "prop-types";
 
 export default class AsmTable extends Component {
     static defaultProps = {};
@@ -33,7 +34,7 @@ export default class AsmTable extends Component {
                 <tbody>
                     {assemblies.map((val, ind) => {
                         return (
-                            <tr key={ind}>
+                            <tr key={ind} className="assembly">
                                 <td>
                                     <Contents id={val.id} />
                                 </td>
@@ -46,3 +47,5 @@ export default class AsmTable extends Component {
         );
     }
 }
+
+

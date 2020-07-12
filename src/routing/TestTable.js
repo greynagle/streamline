@@ -37,7 +37,7 @@ export default class TestTable extends Component {
                 <tbody>
                     {tests.map((val, ind) => {
                         return (
-                            <tr key={ind}>
+                            <tr key={ind} className="test-row">
                                 <td>
                                     <Contents id={val.id} />
                                 </td>

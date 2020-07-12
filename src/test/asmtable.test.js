@@ -1,18 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Table from "../pdm/AsmTable";
-import { mount } from 'enzyme'
+import { mount } from "enzyme";
 import { BrowserRouter as Router } from "react-router-dom";
+import ApiContext from "../ApiContext";
 
-describe("App test", () => {
-    it("renders without crashing", () => {
-        const app = mount(
-            <Router>
-                <Table />
-            </Router>
-        );
-        const div = document.createElement("div");
-        ReactDOM.render(app, div);
-        ReactDOM.unmountComponentAtNode(div);
-    });
+describe("Asm Table test", () => {
+  it("Test component renders with assembly data", () => {
+    const mockValues = {
+      assemblies: [
+        { id: 1, description: "Test Assembly 1" },
+        { id: 2, description: "Test Assembly 2" },
+        { id: 3, description: "Test Assembly 3" },
+        { id: 4, description: "Test Assembly 4" },
+        { id: 5, description: "Test Assembly 5" }
+      ]
+    };
+
+    const app = mount(
+      <Router>
+        <ApiContext.Provider value={mockValues}>
+          <Table />
+        </ApiContext.Provider>
+      </Router>
+    );
+    expect(app.find('.PDM_Table').first().exists).toBeTruthy();
+    expect(app.find('.assembly').length).toBe(mockValues.assemblies.length);
+    app.unmount()
+  });
 });

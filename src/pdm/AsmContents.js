@@ -16,7 +16,7 @@ export default class AsmContents extends Component {
 	componentDidMount() {
         fetch(`${config.API_ENDPOINT}/assemblies/${this.props.id}`)
             .then((data) => {
-                console.log(data)
+                (data)
 				debugger
 				if (!data.ok) return data.json().then((e) => Promise.reject(e));
                 return data.json();
@@ -40,7 +40,7 @@ export default class AsmContents extends Component {
                     <tbody>
                         {this.state.asmContents.map((val, ind) => {
                             return (
-                                <tr key={ind}>
+                                <tr key={ind} className='assembly-content'>
                                     <td>{val.partid}</td>
                                     <td>{val.description}</td>
                                 </tr>

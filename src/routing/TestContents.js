@@ -52,7 +52,7 @@ export default class TestContents extends Component {
                     <tbody>
                         {this.state.testAsm.map((val, ind) => {
                             return (
-                                <tr key={ind}>
+                                <tr key={ind} className="test">
                                     <td>{val.id}</td>
                                     <td>{val.description}</td>
                                     <td>{val.cycletime}</td>
@@ -75,7 +75,7 @@ export default class TestContents extends Component {
                     <tbody>
                         {this.state.testMach.map((val, ind) => {
                             return (
-                                <tr key={ind}>
+                                <tr key={ind} className="test-machine">
                                     <td>{val.id}</td>
                                     <td>{val.name}</td>
                                     <td>{val.utilizationtime}</td>

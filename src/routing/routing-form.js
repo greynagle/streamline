@@ -74,7 +74,6 @@ export default class RoutingForm extends Component {
                     return res.json();
                 })
                 .then((resJSON) => {
-                    // console.log(resJSON);
                     const { batchtime, rundate, id } = resJSON;
                     this.context.addTest({ batchtime, rundate, id });
                 })
