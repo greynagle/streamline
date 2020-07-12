@@ -6,43 +6,44 @@ API repo: https://github.com/greynagle/streamline-api
 
 Landing page:
 
-![landing](./images/landing.png)
+![landing](https://user-images.githubusercontent.com/52943441/87214620-4990e080-c2fc-11ea-856f-989d4dc3dc6d.png)
+
 
 New Part Form
 
-![new part form](./images/newprt.png)
+![New Prt Form](https://user-images.githubusercontent.com/52943441/87214662-ab514a80-c2fc-11ea-8962-50c0144b4fea.png)
 
 Component Tables
 
-![available components](./images/Data.png)
+![Data](https://user-images.githubusercontent.com/52943441/87214577-d0918900-c2fb-11ea-83de-46e5d7fc14b0.png)
 
 New Assembly Form
 
-![new assembly form](./images/newasm.png)
+![image](https://user-images.githubusercontent.com/52943441/87214651-94aaf380-c2fc-11ea-894b-3bdf332488f1.png)
 
 Contents of Assembly
 
-![assembly contents](./images/asmcon.png)
+![assembly contents](https://user-images.githubusercontent.com/52943441/87214611-2f570280-c2fc-11ea-9d4f-1d51fbd406cc.png)
 
 New Machine Form
 
-![new machine form](./images/newmach.png)
+![new mach form](https://user-images.githubusercontent.com/52943441/87214671-c4f29200-c2fc-11ea-8cf5-cd02531c294f.png)
 
 Machine Table
 
-![machine data](./images/mach.png)
+![Machine table](https://user-images.githubusercontent.com/52943441/87214728-3d595300-c2fd-11ea-89b9-137147c13910.png)
 
 New Test Form
 
-![new test form](./images/newtest.png)
+![Test form](https://user-images.githubusercontent.com/52943441/87214677-ddfb4300-c2fc-11ea-80b0-c81a620d9c1d.png)
 
 Test History Table
 
-![testing history](./images/testhist.png)
+![history](https://user-images.githubusercontent.com/52943441/87214689-fbc8a800-c2fc-11ea-8dc2-26399f106aef.png)
 
 Test Contents
 
-![test contents](./images/testcon.png)
+![image](https://user-images.githubusercontent.com/52943441/87214700-0c791e00-c2fd-11ea-89ef-f260d431fe65.png)
 
 _______________________________________
 

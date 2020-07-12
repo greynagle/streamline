@@ -16,7 +16,11 @@ header > h1 > a {
 }
 
 a {
-	color: #87878F
+	color: #000000
+}
+
+td>a {
+	color: #c29b9b
 }
 
 ul {
